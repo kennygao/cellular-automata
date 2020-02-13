@@ -3,6 +3,7 @@ This is a naive implementation of Conway's Game of Life.
 
 The goal is to be pedagogical, not performant.
 """
+import random
 
 
 def display(universe):
@@ -10,7 +11,7 @@ def display(universe):
 
 
 def main():
-    universe = [[0 for columns in range(5)] for rows in range(3)]
+    universe = [[random.randrange(2) for columns in range(5)] for rows in range(3)]
     print(f'{universe=}')
     print(display(universe))
 
