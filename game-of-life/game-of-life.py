@@ -11,7 +11,7 @@ def display(universe):
 
 
 def tick(universe):
-    return universe
+    return [[1 - cell for cell in row] for row in universe]
 
 
 def main():
