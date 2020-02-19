@@ -65,5 +65,38 @@ def main():
     print(display(tick_universe(universe, game_of_life)))
 
 
+def iterate(f, a, iterations):
+    if iterations < 1:
+        return a
+    else:
+        return iterate(f, f(a), iterations - 1)
+
+
+def test():
+    # r-pentomino
+    universe_0 = [
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 1, 0, 0],
+        [0, 0, 1, 1, 0, 0, 0],
+        [0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+    ]
+    universe_7 = [
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 0, 0],
+        [0, 1, 1, 0, 1, 1, 0],
+        [0, 1, 0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0, 1, 0],
+        [0, 0, 1, 1, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+    ]
+    assert universe_7 == iterate(
+        lambda universe: tick_universe(universe, game_of_life), universe_0, 7
+    )
+
+
 if __name__ == "__main__":
+    test()
     main()
