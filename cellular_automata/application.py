@@ -21,8 +21,11 @@ class Application:
         self.display(self.simulation)
 
     def configure_ui(self):
-        self.ui["time"] = tkinter.Label(self.root, height=30, width=30)
+        self.ui["time"] = tkinter.Label(self.root)
         self.ui["time"].pack()
+
+        self.ui["space"] = tkinter.Label(self.root)
+        self.ui["space"].pack()
 
     def configure_bind(self):
         self.root.bind("<Right>", lambda e: self.display(self.tick()))
@@ -41,9 +44,13 @@ class Application:
         return self.simulation
 
     def display(self, simulation):
-        # TODO: Delegate to `root`.
-        self.ui["time"]["text"] = self.visualization.render(simulation)
-        print(self.ui["time"]["text"])
+        self.ui["time"].text = self.visualization.render_time(simulation)
+        self.ui["space"].image = tkinter.PhotoImage(
+            data=self.visualization.render_space(simulation), format="ppm"
+        )
+
+        self.ui["time"]["text"] = self.ui["time"].text
+        self.ui["space"]["image"] = self.ui["space"].image
 
     def start(self):
         if sys.platform == "darwin":

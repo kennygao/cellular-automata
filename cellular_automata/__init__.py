@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import random
 import tkinter
 
 from application import Application
@@ -11,10 +12,14 @@ from visualization import Visualization
 
 
 def main():
+    initial_space = [[random.randrange(2) for _ in range(100)] for _ in range(100)]
+    initial_frame = Frame(0, initial_space)
+    initial_history = StackHistory([initial_frame])
+
     Application(
         root=tkinter.Tk(),
         visualization=Visualization(),
-        simulation=Simulation(StackHistory([Frame(0, [])]), TrivialRuleSet()),
+        simulation=Simulation(initial_history, TrivialRuleSet()),
     ).start()
 
 
