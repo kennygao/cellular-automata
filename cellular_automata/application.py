@@ -22,9 +22,9 @@ class Application:
 
     def configure_ui(self):
         self.ui["time"] = tkinter.Label(self.root)
-        self.ui["time"].pack()
-
         self.ui["space"] = tkinter.Label(self.root)
+
+        self.ui["time"].pack()
         self.ui["space"].pack()
 
     def configure_bind(self):

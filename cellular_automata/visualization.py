@@ -9,6 +9,9 @@ class Visualization:
         return simulation.history.current_frame().time
 
     def render_space(self, simulation):
+        def render_cell(cell):
+            return {0: (0, 0, 0), 1: (1, 1, 1)}[cell]
+
         space = simulation.history.current_frame().space
 
         height = len(space)
@@ -16,10 +19,7 @@ class Visualization:
 
         preamble = bytes(f"P6 {width} {height} 1" + "\n", "ascii")
         raster = bytes(
-            sample for row in space for cell in row for sample in self.render_cell(cell)
+            sample for row in space for cell in row for sample in render_cell(cell)
         )
 
         return preamble + raster
-
-    def render_cell(self, cell):
-        return {0: (0, 0, 0), 1: (1, 1, 1)}[cell]
